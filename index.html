@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirmaan Infra - Building Your Dreams</title>
+    <link rel="icon" type="image/png" href="resources/nirmaaninfologo-modified.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-section">
+                <a href="#home" class="logo-link">
+                    <img src="resources/nirmaaninfologo-modified.png" alt="Nirmaan Infra Logo" class="logo">
+                </a>
+                <span class="company-name">Nirmaan Infra</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with 3D Effects -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title" data-aos="fade-up">
+                    Building Your <span class="highlight">Dreams</span>
+                </h1>
+                <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+                    Construction & Engineering Excellence Across India
+                </p>
+                <p class="hero-description" data-aos="fade-up" data-aos-delay="300">
+                    Comprehensive infrastructure solutions across State and Central Government projects, railways, real estate developments, and irrigation systems - delivered with unmatched expertise and commitment to excellence.
+                </p>
+                <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
+                    <button class="btn btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+                        Get in Touch
+                    </button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">
+                        View Projects
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image-3d">
+                <div class="cube-wrapper">
+                    <div class="cube">
+                        <div class="cube-face front">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="cube-face back">
+                            <i class="fas fa-road"></i>
+                        </div>
+                        <div class="cube-face right">
+                            <i class="fas fa-hammer"></i>
+                        </div>
+                        <div class="cube-face left">
+                            <i class="fas fa-map"></i>
+                        </div>
+                        <div class="cube-face top">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <div class="cube-face bottom">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <!-- Crazy Background Effects -->
+        <div class="about-shape"></div>
+        <div class="about-shape"></div>
+        <div class="about-shape"></div>
+        <div class="about-shape"></div>
+        <div class="about-shape"></div>
+        <div class="about-3d-element"></div>
+        <div class="about-3d-element"></div>
+        <div class="about-3d-element"></div>
+        <div class="about-orb"></div>
+        <div class="about-orb"></div>
+        <div class="about-orb"></div>
+
+        <div class="container">
+            <h2 class="section-title">About Nirmaan Infra</h2>
+            <div class="about-content">
+                <div class="about-card card-glass">
+                    <h3>Our Story</h3>
+                    <p>
+                        Nirmaan Infra is a leading construction and engineering company dedicated to transforming India's infrastructure landscape. 
+                        With expertise spanning residential real estates, plot sales, government infrastructure projects, and specialized railway engineering works, 
+                        we bring innovation, quality, and reliability to every project we undertake.
+                    </p>
+                </div>
+
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <h4>70+</h4>
+                        <p>Projects Completed</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>5+</h4>
+                        <p>Years Experience</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>4+</h4>
+                        <p>Active States (AP, TG, KA, TN)</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>100%</h4>
+                        <p>Client Satisfaction</p>
+                    </div>
+                </div>
+
+                <div class="founders-section">
+                    <h3>Meet Our Founders</h3>
+                    <div class="founders-grid">
+                        <div class="founder-card">
+                            <div class="founder-image">
+                                <img src="resources/tulasi.jpeg" alt="Tulasi Ram Thathigari" class="founder-photo">
+                            </div>
+                            <h4>Tulasi Ram Thathigari</h4>
+                            <p class="founder-title">Founder & CEO</p>
+                            <p class="founder-bio">
+                                Visionary leader with 5+ years of experience in construction and infrastructure development. 
+                                Passionate about quality and innovation in every project.
+                            </p>
+                        </div>
+
+                        <div class="founder-card">
+                            <div class="founder-image">
+                                <img src="resources/yogesh.jpeg" alt="Yogesh Muppiri" class="founder-photo">
+                            </div>
+                            <h4>Yogesh Muppiri</h4>
+                            <p class="founder-title">Co-Founder & CTO</p>
+                            <p class="founder-bio">
+                                Technical innovator with 4+ years of experience in engineering and project management. 
+                                Also works as a software developer at Amazon in the United States, bringing global tech expertise to our projects.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <!-- Railway Engineering -->
+                <div class="service-card service-card-1">
+                    <div class="service-icon">
+                        <i class="fas fa-train"></i>
+                    </div>
+                    <h3>Railway Engineering</h3>
+                    <p>Specialized engineering works for railway infrastructure, including track work, bridges, and stations. Connecting India at scale.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Track Construction</li>
+                        <li><i class="fas fa-check-circle"></i> Bridge Engineering</li>
+                        <li><i class="fas fa-check-circle"></i> Station Development</li>
+                    </ul>
+                </div>
+
+                <!-- Engineering Works -->
+                <div class="service-card service-card-2">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Engineering Works</h3>
+                    <p>End-to-end engineering solutions with expert consultation, design, and implementation for complex infrastructure projects.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Expert Design</li>
+                        <li><i class="fas fa-check-circle"></i> Technical Support</li>
+                        <li><i class="fas fa-check-circle"></i> Compliance Assured</li>
+                    </ul>
+                </div>
+
+                <!-- Real Estate -->
+                <div class="service-card service-card-3">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Real Estate Development</h3>
+                    <p>Premium residential and commercial projects in Bangalore, Hyderabad, Tirupathi, and Chittoor. Modern living spaces with world-class amenities.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Luxury Apartments</li>
+                        <li><i class="fas fa-check-circle"></i> Villa Communities</li>
+                        <li><i class="fas fa-check-circle"></i> Commercial Spaces</li>
+                    </ul>
+                </div>
+
+                <!-- Plot Sales -->
+                <div class="service-card service-card-4">
+                    <div class="service-icon">
+                        <i class="fas fa-map"></i>
+                    </div>
+                    <h3>Plot Sales</h3>
+                    <p>Well-planned, prime location plots with all necessary approvals and infrastructure. Your foundation for a dream home or investment.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Prime Locations</li>
+                        <li><i class="fas fa-check-circle"></i> All Approvals</li>
+                        <li><i class="fas fa-check-circle"></i> Easy EMI Options</li>
+                    </ul>
+                </div>
+
+                <!-- Government Projects -->
+                <div class="service-card service-card-5">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Government Projects</h3>
+                    <p>Infrastructure development including roads, highways, check dams, and public utilities. Building India's backbone.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Road Construction</li>
+                        <li><i class="fas fa-check-circle"></i> Water Management</li>
+                        <li><i class="fas fa-check-circle"></i> Public Infrastructure</li>
+                    </ul>
+                </div>
+
+                <!-- Civil Works -->
+                <div class="service-card service-card-6">
+                    <div class="service-icon">
+                        <i class="fas fa-hammer"></i>
+                    </div>
+                    <h3>Civil Works</h3>
+                    <p>Comprehensive civil engineering solutions including structural design, construction, and project management for diverse requirements.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Structural Design</li>
+                        <li><i class="fas fa-check-circle"></i> Quality Construction</li>
+                        <li><i class="fas fa-check-circle"></i> Project Management</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card project-card-multi">
+                    <div class="project-image-grid">
+                        <div class="project-thumb"><img src="resources/road1.jpeg" alt="State Government Works 1" class="project-image"></div>
+                        <div class="project-thumb"><img src="resources/road2.jpeg" alt="State Government Works 2" class="project-image"></div>
+                        <div class="project-thumb"><img src="resources/road3.jpeg" alt="State Government Works 3" class="project-image"></div>
+                        <div class="project-thumb"><img src="resources/road4.jpeg" alt="State Government Works 4" class="project-image"></div>
+                    </div>
+                    <div class="project-overlay">
+                        <h4>State Government Works</h4>
+                        <p>Multi-phase highway and road construction projects delivering state-level infrastructure excellence.</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image-wrapper">
+                        <img src="resources/railwaywork.jpg" alt="Central Government Railway Works" class="project-image">
+                        <div class="project-overlay">
+                            <h4>Central Government Railway Works</h4>
+                            <p>Civil and track works plus mech-breths frame and air brake services for 5+ trains daily including Vande Bharat Express.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card project-card-multi">
+                    <div class="project-image-grid">
+                        <div class="project-thumb"><img src="resources/venture.png" alt="Venture Project" class="project-image"></div>
+                        <div class="project-thumb"><img src="resources/appartment.png" alt="Apartment Project" class="project-image"></div>
+                        <div class="project-thumb"><img src="resources/villa.png" alt="Villa Project" class="project-image"></div>
+                        <div class="project-thumb"><img src="resources/renatal.png" alt="Rental Apartments" class="project-image"></div>
+                    </div>
+                    <div class="project-overlay">
+                        <h4>Real Estate Developments</h4>
+                        <p>Villas, apartments, rental properties and ventures delivered with premium craftsmanship.</p>
+                    </div>
+                </div>
+
+                <div class="project-card project-card-multi">
+                    <div class="project-image-grid">
+                        <div class="project-thumb"><img src="resources/irrigation.jpeg" alt="Irrigation Project 1" class="project-image"></div>
+                        <div class="project-thumb"><img src="resources/irrigation2.jpeg" alt="Irrigation Project 2" class="project-image"></div>
+                        <div class="project-thumb"><img src="resources/checkdam.jpg" alt="Check Dam Project" class="project-image"></div>
+                        <div class="project-thumb"><img src="resources/irrigation4.png" alt="Drainage Project" class="project-image"></div>
+                    </div>
+                    <div class="project-overlay">
+                        <h4>Irrigation Projects</h4>
+                        <p>Lake development, check dams and drainage systems for comprehensive water resource management.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us">
+        <div class="container">
+            <h2 class="section-title">Why Choose Nirmaan Infra?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>Excellence</h4>
+                    <p>Commitment to quality in every aspect of our work</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>Reliability</h4>
+                    <p>On-time delivery and commitment to deadlines</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Expertise</h4>
+                    <p>6+ years of experience across multiple sectors</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h4>Sustainability</h4>
+                    <p>Eco-friendly practices in all our projects</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h4>Partnership</h4>
+                    <p>Long-term relationships built on trust</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h4>Innovation</h4>
+                    <p>Cutting-edge technology and methods</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h4>Our Presence</h4>
+                        <p>22-11-113/1, Poolavani gunta, Reniguta road, Tirupathi, Andhra pradesh, 517501</p>
+                    </div>
+
+                    <div class="info-card">
+                        <i class="fas fa-phone"></i>
+                        <h4>Phone</h4>
+                        <p><a href="tel:+919876543210">+91 9876 543 210</a></p>
+                    </div>
+
+                    <div class="info-card">
+                        <i class="fas fa-envelope"></i>
+                        <h4>Email</h4>
+                        <p><a href="mailto:nirmaaninfrasupport@gmail.com">nirmaaninfrasupport@gmail.com</a></p>
+                    </div>
+
+                    <div class="info-card">
+                        <i class="fas fa-clock"></i>
+                        <h4>Working Hours</h4>
+                        <p>Mon - Fri: 9:00 AM - 6:00 PM<br>Sat: 10:00 AM - 4:00 PM</p>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contactForm" name="contact" method="POST" netlify netlify-honeypot="bot-field">
+                    <div style="display: none;">
+                        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Nirmaan Infra</h4>
+                    <p>Leading construction and engineering company building India's future with innovation and excellence.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/nirmaaninfra" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nirmaan Infra. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div class="fab-container">
+        <button class="fab" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+            <i class="fas fa-envelope"></i>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

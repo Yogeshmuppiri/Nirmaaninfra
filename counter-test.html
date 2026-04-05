@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Counter Test</title>
+</head>
+<body>
+    <div class="stat-card" data-target="50">
+        <h4 class="stat-counter">0+</h4>
+        <p>Projects Completed</p>
+    </div>
+    <div class="stat-card" data-target="5">
+        <h4 class="stat-counter">0+</h4>
+        <p>Years Experience</p>
+    </div>
+    <div class="stat-card" data-target="4">
+        <h4 class="stat-counter">0+</h4>
+        <p>Active States</p>
+    </div>
+    <div class="stat-card" data-target="100">
+        <h4 class="stat-counter">0%</h4>
+        <p>Client Satisfaction</p>
+    </div>
+
+    <script>
+        const statCards = document.querySelectorAll('.stat-card');
+        const startCounting = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.dataset.counted) {
+                    const target = entry.target;
+                    const counterElement = target.querySelector('.stat-counter');
+                    const endValue = parseInt(target.dataset.target);
+                    const duration = 2000; // 2 seconds
+                    const steps = Math.min(endValue, 50); // Limit steps for smooth animation
+                    const stepTime = duration / steps;
+                    let currentValue = 0;
+                    const increment = Math.ceil(endValue / steps);
+
+                    const counter = setInterval(() => {
+                        currentValue += increment;
+                        if (currentValue >= endValue) {
+                            counterElement.textContent = endValue + (endValue === 100 ? '%' : '+');
+                            clearInterval(counter);
+                            target.dataset.counted = true;
+                        } else {
+                            counterElement.textContent = currentValue + (endValue === 100 ? '%' : '+');
+                        }
+                    }, stepTime);
+                }
+            });
+        };
+
+        // Test: Trigger immediately
+        statCards.forEach(card => {
+            const event = { isIntersecting: true, target: card };
+            startCounting([event]);
+        });
+    </script>
+</body>
+</html>

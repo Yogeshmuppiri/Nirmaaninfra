@@ -1,0 +1,15 @@
+[build]
+  publish = "."
+  command = "echo 'No build step required'"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[dev]
+  command = "python -m http.server 8080"
+  port = 8080
