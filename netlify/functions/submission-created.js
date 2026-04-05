@@ -100,7 +100,7 @@ const buildCustomerEmail = ({ logoUrl, submission }) =>
             <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;">
                 <div style="flex:1 1 200px;padding:18px 20px;border-radius:18px;background:#0f172a;color:#ffffff;">
                     <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#93c5fd;margin-bottom:8px;">Phone</div>
-                    <div style="font-size:16px;font-weight:700;line-height:1.5;">+91 9876 543 210</div>
+                    <div style="font-size:16px;font-weight:700;line-height:1.5;">+91 63042 11353</div>
                 </div>
                 <div style="flex:1 1 200px;padding:18px 20px;border-radius:18px;background:#ecfeff;color:#0f172a;border:1px solid #bae6fd;">
                     <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#0891b2;margin-bottom:8px;">Email</div>
@@ -148,8 +148,19 @@ const createTransporter = () => {
 
 exports.handler = async (event) => {
     try {
-        const parsedBody = event.body ? JSON.parse(event.body) : {};
+        const parsedBody = typeof event.body === "string"
+            ? JSON.parse(event.body)
+            : (event.body || {});
         const submission = extractSubmission(parsedBody);
+
+        console.log("submission-created invocation", {
+            hasBody: Boolean(event.body),
+            bodyType: typeof event.body,
+            formName: submission.formName || "contact",
+            hasName: Boolean(submission.name),
+            hasEmail: Boolean(submission.email),
+            hasMessage: Boolean(submission.message)
+        });
 
         if (submission.formName && submission.formName !== "contact") {
             return {
@@ -172,12 +183,29 @@ exports.handler = async (event) => {
         const from = process.env.MAIL_FROM || `Nirmaan Infra <${smtpUser}>`;
         const ownerEmail = process.env.MAIL_TO || OWNER_EMAIL;
 
+        console.log("submission-created env check", {
+            hasSmtpUser: Boolean(process.env.SMTP_USER),
+            hasSmtpPassword: Boolean(process.env.SMTP_APP_PASSWORD),
+            smtpHost: process.env.SMTP_HOST || "smtp.gmail.com",
+            smtpPort: process.env.SMTP_PORT || "465",
+            hasMailTo: Boolean(process.env.MAIL_TO),
+            hasMailFrom: Boolean(process.env.MAIL_FROM)
+        });
+
+        await transporter.verify();
+        console.log("submission-created transporter verification passed");
+
         await transporter.sendMail({
             from,
             to: ownerEmail,
             replyTo: submission.email,
             subject: `New website inquiry from ${submission.name || "Website visitor"}`,
             html: buildOwnerEmail({ logoUrl, submission })
+        });
+
+        console.log("submission-created owner email sent", {
+            to: ownerEmail,
+            replyTo: submission.email
         });
 
         await transporter.sendMail({
@@ -188,12 +216,23 @@ exports.handler = async (event) => {
             html: buildCustomerEmail({ logoUrl, submission })
         });
 
+        console.log("submission-created customer email sent", {
+            to: submission.email
+        });
+
         return {
             statusCode: 200,
             body: JSON.stringify({ ok: true })
         };
     } catch (error) {
-        console.error("submission-created email workflow failed", error);
+        console.error("submission-created email workflow failed", {
+            message: error.message,
+            code: error.code,
+            command: error.command,
+            response: error.response,
+            responseCode: error.responseCode,
+            stack: error.stack
+        });
 
         return {
             statusCode: 500,
