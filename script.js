@@ -282,36 +282,55 @@ if (contactForm) {
         submitBtn.disabled = true;
         submitBtn.style.background = '#f59e0b';
 
-        // Prepare form data for Netlify
+        // Prepare form data for Netlify and email delivery
         const formData = new FormData(this);
+        const submissionData = {
+            name: String(formData.get('name') || ''),
+            email: String(formData.get('email') || ''),
+            subject: String(formData.get('subject') || ''),
+            message: String(formData.get('message') || ''),
+            siteUrl: window.location.origin
+        };
 
-        // Submit to Netlify Forms
+        // Submit to Netlify Forms first, then trigger email delivery
         fetch('/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams(formData).toString()
         })
         .then(response => {
-            if (response.ok) {
-                showFormMessage('Message sent successfully. We will get back to you soon.', 'success');
-                submitBtn.textContent = 'Sent';
-                submitBtn.style.background = '#10b981';
-
-                // Reset form after success
-                setTimeout(() => {
-                    this.reset();
-                    submitBtn.textContent = originalText;
-                    submitBtn.style.background = '';
-                    submitBtn.disabled = false;
-                    clearFormMessages();
-                }, 3000);
-            } else {
+            if (!response.ok) {
                 throw new Error('Form submission failed');
             }
+
+            return fetch('/.netlify/functions/send-contact-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(submissionData)
+            });
+        })
+        .then(async response => {
+            if (!response.ok) {
+                const errorPayload = await response.json().catch(() => ({}));
+                throw new Error(errorPayload.error || 'Email delivery failed');
+            }
+
+            showFormMessage('Message sent successfully. We will get back to you soon.', 'success');
+            submitBtn.textContent = 'Sent';
+            submitBtn.style.background = '#10b981';
+
+            // Reset form after success
+            setTimeout(() => {
+                this.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.style.background = '';
+                submitBtn.disabled = false;
+                clearFormMessages();
+            }, 3000);
         })
         .catch(error => {
             console.error('Form submission error:', error);
-            showFormMessage('Failed to send message. Please try again or contact us directly.', 'error');
+            showFormMessage('Your form was submitted, but email delivery needs attention. Please contact us directly if urgent.', 'error');
             submitBtn.textContent = 'Try Again';
             submitBtn.style.background = '#ef4444';
             submitBtn.disabled = false;
