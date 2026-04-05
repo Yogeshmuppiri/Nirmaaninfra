@@ -228,7 +228,11 @@ exports.handler = async (event) => {
             statusCode: 500,
             body: JSON.stringify({
                 ok: false,
-                error: error.message
+                error: error.message,
+                code: error.code || null,
+                command: error.command || null,
+                response: error.response || null,
+                responseCode: error.responseCode || null
             })
         };
     }

@@ -312,7 +312,13 @@ if (contactForm) {
         .then(async response => {
             if (!response.ok) {
                 const errorPayload = await response.json().catch(() => ({}));
-                throw new Error(errorPayload.error || 'Email delivery failed');
+                const detailedError = [
+                    errorPayload.error,
+                    errorPayload.code,
+                    errorPayload.responseCode,
+                    errorPayload.response
+                ].filter(Boolean).join(' | ');
+                throw new Error(detailedError || 'Email delivery failed');
             }
 
             showFormMessage('Message sent successfully. We will get back to you soon.', 'success');
@@ -330,7 +336,7 @@ if (contactForm) {
         })
         .catch(error => {
             console.error('Form submission error:', error);
-            showFormMessage('Your form was submitted, but email delivery needs attention. Please contact us directly if urgent.', 'error');
+            showFormMessage(`Your form was submitted, but email delivery needs attention: ${error.message}`, 'error');
             submitBtn.textContent = 'Try Again';
             submitBtn.style.background = '#ef4444';
             submitBtn.disabled = false;
