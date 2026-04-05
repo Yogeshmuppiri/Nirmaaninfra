@@ -195,6 +195,56 @@ document.querySelectorAll('.service-card, .stat-card, .founder-card, .feature-it
     observer.observe(element);
 });
 
+const animateCounter = (card) => {
+    const counter = card.querySelector('.stat-value');
+    const target = Number(card.dataset.target);
+    const suffix = card.dataset.suffix || '';
+
+    if (!counter || Number.isNaN(target) || card.dataset.counted === 'true') {
+        return;
+    }
+
+    card.dataset.counted = 'true';
+
+    const duration = 1800;
+    const start = performance.now();
+
+    const updateCounter = (timestamp) => {
+        const progress = Math.min((timestamp - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const currentValue = Math.round(target * eased);
+
+        counter.textContent = `${currentValue}${suffix}`;
+
+        if (progress < 1) {
+            window.requestAnimationFrame(updateCounter);
+        } else {
+            counter.textContent = `${target}${suffix}`;
+        }
+    };
+
+    window.requestAnimationFrame(updateCounter);
+};
+
+const statCards = document.querySelectorAll('.stat-card[data-target]');
+
+if ('IntersectionObserver' in window && statCards.length) {
+    const statObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                statObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.35
+    });
+
+    statCards.forEach(card => {
+        statObserver.observe(card);
+    });
+}
+
 // ===================================
 // CONTACT FORM HANDLING (Netlify Forms) - Enhanced for Mobile
 // ===================================
@@ -228,7 +278,7 @@ if (contactForm) {
         // Show loading state
         const submitBtn = this.querySelector('button');
         const originalText = submitBtn.textContent;
-        submitBtn.textContent = '📤 Sending...';
+        submitBtn.textContent = 'Sending...';
         submitBtn.disabled = true;
         submitBtn.style.background = '#f59e0b';
 
@@ -239,18 +289,12 @@ if (contactForm) {
         fetch('/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams({
-                'form-name': 'contact',
-                'name': formData.get('name'),
-                'email': formData.get('email'),
-                'subject': formData.get('subject'),
-                'message': formData.get('message')
-            }).toString()
+            body: new URLSearchParams(formData).toString()
         })
         .then(response => {
             if (response.ok) {
-                showFormMessage('✅ Message sent successfully! We\'ll get back to you soon.', 'success');
-                submitBtn.textContent = '✅ Sent!';
+                showFormMessage('Message sent successfully. We will get back to you soon.', 'success');
+                submitBtn.textContent = 'Sent';
                 submitBtn.style.background = '#10b981';
 
                 // Reset form after success
@@ -267,8 +311,8 @@ if (contactForm) {
         })
         .catch(error => {
             console.error('Form submission error:', error);
-            showFormMessage('❌ Failed to send message. Please try again or contact us directly.', 'error');
-            submitBtn.textContent = '❌ Try Again';
+            showFormMessage('Failed to send message. Please try again or contact us directly.', 'error');
+            submitBtn.textContent = 'Try Again';
             submitBtn.style.background = '#ef4444';
             submitBtn.disabled = false;
 
@@ -470,62 +514,6 @@ const adjustMenuForMobile = () => {
 window.addEventListener('resize', adjustMenuForMobile);
 
 // ===================================
-// SCROLL TO TOP BUTTON
-// ===================================
-
-const createScrollTopButton = () => {
-    const scrollTopBtn = document.createElement('button');
-    scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    scrollTopBtn.className = 'scroll-top-btn';
-    scrollTopBtn.style.cssText = `
-        position: fixed;
-        bottom: 100px;
-        right: 30px;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #2563eb, #06b6d4);
-        color: white;
-        border: none;
-        cursor: pointer;
-        display: none;
-        z-index: 998;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-        box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
-        transition: all 0.3s ease;
-    `;
-    
-    document.body.appendChild(scrollTopBtn);
-    
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            scrollTopBtn.style.display = 'flex';
-        } else {
-            scrollTopBtn.style.display = 'none';
-        }
-    });
-    
-    scrollTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-    
-    scrollTopBtn.addEventListener('mouseenter', () => {
-        scrollTopBtn.style.transform = 'scale(1.1)';
-    });
-    
-    scrollTopBtn.addEventListener('mouseleave', () => {
-        scrollTopBtn.style.transform = 'scale(1)';
-    });
-};
-
-createScrollTopButton();
-
-// ===================================
 // PAGE LOAD ANIMATION
 // ===================================
 
@@ -562,6 +550,43 @@ function throttle(func, limit) {
 // ENHANCED ANIMATIONS
 // ===================================
 
+const enableProjectTilt = () => {
+    const projectCards = document.querySelectorAll('.project-card');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isDesktop = window.innerWidth > 1024;
+
+    projectCards.forEach(card => {
+        card.style.transform = '';
+        card.style.transformStyle = '';
+        card.style.transition = '';
+        card.onpointermove = null;
+        card.onpointerleave = null;
+    });
+
+    if (!isDesktop || prefersReducedMotion) {
+        return;
+    }
+
+    projectCards.forEach(card => {
+        card.style.transformStyle = 'preserve-3d';
+        card.style.transition = 'transform 0.18s ease, box-shadow 0.25s ease';
+
+        card.onpointermove = (event) => {
+            const rect = card.getBoundingClientRect();
+            const pointerX = event.clientX - rect.left;
+            const pointerY = event.clientY - rect.top;
+            const rotateY = ((pointerX / rect.width) - 0.5) * 10;
+            const rotateX = (0.5 - (pointerY / rect.height)) * 8;
+
+            card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+        };
+
+        card.onpointerleave = () => {
+            card.style.transform = '';
+        };
+    });
+};
+
 // Add stagger animation to service cards
 const enhanceServiceCards = () => {
     const cards = document.querySelectorAll('.service-card');
@@ -588,10 +613,12 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         enhanceServiceCards();
         enhanceStatCards();
+        enableProjectTilt();
     });
 } else {
     enhanceServiceCards();
     enhanceStatCards();
+    enableProjectTilt();
 }
 
 // ===================================
@@ -631,3 +658,4 @@ const optimizedScroll = throttle(() => {
 }, 100);
 
 window.addEventListener('scroll', optimizedScroll);
+window.addEventListener('resize', debounce(enableProjectTilt, 120));

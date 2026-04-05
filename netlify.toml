@@ -2,6 +2,9 @@
   publish = "."
   command = "echo 'No build step required'"
 
+[functions]
+  directory = "netlify/functions"
+
 [build.environment]
   NODE_VERSION = "18"
 
